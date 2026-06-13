@@ -1,0 +1,122 @@
+aid: highspot
+name: Highspot
+description: >-
+  Highspot is a sales enablement platform offering a REST API for managing content,
+  training programs, pitch analytics, CRM integrations, and buyer engagement tracking.
+  The API provides access to spots, items, users, groups, pitches, and analytics,
+  with OAuth 2.0 authentication and API key credentials. Highspot also offers an
+  MCP Server enabling LLMs to search content, manage pitches, generate Digital Rooms,
+  and access the Insights Layer APIs for search and instant answers in AI workflows.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/highspot/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - Sales Enablement
+  - Content Management
+  - Pitch Analytics
+  - CRM Integration
+  - Buyer Engagement
+  - Training
+  - Coaching
+  - AI
+  - MCP Server
+apis:
+  - aid: highspot:highspot-api
+    name: Highspot API
+    description: >-
+      The Highspot REST API provides programmatic access to the Highspot sales
+      enablement platform, enabling management of content (spots and items),
+      users, groups, pitches, domain settings, and analytics. Supports standard
+      HTTP methods (GET, POST, PUT, DELETE) with API key authentication using
+      client key and secret credentials obtained from the Developer section of
+      Highspot account settings.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.highspot.com/
+    baseURL: https://api-su2.highspot.com
+    tags:
+      - Sales Enablement
+      - Content Management
+      - Pitch Analytics
+      - CRM Integration
+    properties:
+      - type: Documentation
+        url: https://highspot.readthedocs.io/en/latest/primary-modules.html
+      - type: PythonSDK
+        url: https://highspot.readthedocs.io/
+      - type: Authentication
+        url: https://docs.workato.com/en/connectors/highspot.html
+    contact:
+      - FN: Highspot Support
+        url: https://www.highspot.com/contact/
+        email: support@highspot.com
+
+  - aid: highspot:highspot-mcp-server
+    name: Highspot MCP Server
+    description: >-
+      The Highspot MCP Server leverages the Model Context Protocol to provide
+      LLMs with access to sales content, knowledge, insights, and actions within
+      Highspot. Enables searching content, accessing deal-specific answers, recommending
+      content, creating linked pitches, generating Digital Rooms, and invoking
+      Highspot Agents. Available in OpenAI, Anthropic, and Microsoft Copilot platforms.
+      Throttle limit: 100 API calls per connection per 60 seconds.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.highspot.com/product/mcp-server/
+    baseURL: https://api-su2.highspot.com
+    tags:
+      - MCP
+      - AI
+      - LLM
+      - Sales Enablement
+    properties:
+      - type: Documentation
+        url: https://www.highspot.com/product/mcp-server/
+      - type: MicrosoftConnector
+        url: https://learn.microsoft.com/en-us/connectors/highspotmcptestjan20/
+    contact:
+      - FN: Highspot Support
+        url: https://www.highspot.com/contact/
+        email: support@highspot.com
+
+common:
+  - type: Website
+    url: https://www.highspot.com/
+  - type: Documentation
+    url: https://highspot.readthedocs.io/en/latest/primary-modules.html
+  - type: PythonSDK
+    url: https://highspot.readthedocs.io/
+  - type: Integrations
+    url: https://www.highspot.com/integrations/
+  - type: IntegrationDirectory
+    url: https://exchange.highspot.com/integrations
+  - type: MCPServer
+    url: https://www.highspot.com/product/mcp-server/
+  - type: Pricing
+    url: https://www.highspot.com/pricing/
+  - type: Status
+    url: https://status.highspot.com/
+  - type: Security
+    url: https://www.highspot.com/trust/
+  - type: Privacy
+    url: https://www.highspot.com/privacy/
+  - type: TermsOfService
+    url: https://www.highspot.com/terms/
+  - type: Contact
+    url: https://www.highspot.com/contact/
+  - type: Blog
+    url: https://www.highspot.com/blog/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/highspot
+  - type: GitHub
+    url: https://github.com/highspot
+  - type: Plans
+    url: plans/highspot-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/highspot-rate-limits.yml
+  - type: FinOps
+    url: finops/highspot-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

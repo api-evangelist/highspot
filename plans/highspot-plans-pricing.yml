@@ -1,0 +1,82 @@
+name: Highspot Plans and Pricing
+description: >-
+  Highspot offers three tiers of its sales enablement platform with custom pricing
+  tailored to capabilities, use cases, services, and organization size. There are
+  no published per-seat prices; all quotes require contacting sales. Typical annual
+  contract values range from $21,066 to $178,451 with a median of approximately
+  $60,005 based on market data. Per-user pricing decreases with volume and
+  multi-year commitments typically unlock additional discounts.
+url: https://www.highspot.com/pricing/
+plans:
+  - name: Good — Equip and Engage
+    description: >-
+      Foundation-level plan for content management, AI-powered search, and basic
+      sales enablement. Includes AI-supported content organization and governance,
+      content personalization and autogeneration, Sales Plays and Digital Sales Rooms,
+      CRM integration and analytics, and Highspot Agents.
+    pricing: Custom — contact sales
+    features:
+      - AI-supported content organization and governance
+      - AI-powered search and answers
+      - Content personalization and autogeneration
+      - Sales Plays
+      - Digital Sales Rooms
+      - AI-generated knowledge checks
+      - CRM integration and analytics
+      - Highspot Agents
+    apiAccess: Limited
+
+  - name: Better — Train and Practice
+    description: >-
+      Mid-market tier adding training and skills management on top of all Good
+      features. Includes skills and competencies management, AI-assisted training
+      authoring, event-based and on-demand learning, adaptive learning, practice
+      and skill reinforcement, automated nudging, and enhanced agent capabilities.
+    pricing: Custom — contact sales
+    features:
+      - All Good tier features
+      - Skills and competencies management
+      - AI-assisted training authoring
+      - Event-based and on-demand learning
+      - Adaptive learning with test-out options
+      - Practice and skill reinforcement
+      - Automated nudging
+      - Enhanced agent capabilities with training context
+    apiAccess: Standard
+
+  - name: Best — Coach and Reinforce
+    description: >-
+      Full-featured enterprise tier adding coaching intelligence, meeting analytics,
+      and full API access on top of all Better features. Includes MCP Server and
+      Insights Layer APIs, Meeting Intelligence, meeting recap and follow-up, advanced
+      AI coaching, and integrations with Agentforce, Microsoft Copilot, and Slack AI.
+    pricing: Custom — contact sales
+    features:
+      - All Better tier features
+      - Delivery and Meeting Intelligence
+      - Meeting recap and follow-up
+      - Advanced coaching support
+      - AI feedback on meetings
+      - MCP Server access
+      - Insights Layer APIs (Search and Instant Answers)
+      - Integrations with Salesforce Agentforce
+      - Integration with Microsoft Copilot
+      - Integration with Slack AI
+    apiAccess: Full — includes MCP Server and Insights Layer APIs
+
+additionalCosts:
+  - item: Onboarding
+    range: "$10,000–$50,000+"
+  - item: Training and enablement services
+    range: "$5,000–$25,000"
+  - item: Premium integrations
+    range: Variable
+  - item: Annual renewal increases
+    range: "3–7% typical"
+
+marketData:
+  medianAnnualContractValue: "$60,005"
+  contractRange: "$21,066–$178,451"
+  averageSavingsNegotiated: "14.59%"
+  totalCostOfOwnershipPremium: "15–30% above subscription quote"
+  source: https://www.vendr.com/marketplace/highspot

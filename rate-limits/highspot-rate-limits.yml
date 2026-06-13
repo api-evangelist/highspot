@@ -1,0 +1,54 @@
+name: Highspot Rate Limits
+description: >-
+  Highspot enforces rate limits on its REST API and MCP Server to maintain
+  platform performance and fair usage. The MCP Server connector documents an
+  explicit limit of 100 API calls per connection per 60-second renewal window.
+  General REST API rate limits vary by subscription plan and are not publicly
+  documented; contact Highspot support for plan-specific limits.
+url: https://www.highspot.com/contact/
+
+limits:
+  - name: MCP Server — API calls per connection
+    description: >-
+      Throttle limit for the Highspot MCP Server connector (Microsoft Power Platform
+      and Copilot Studio integration). Applies per connection within a 60-second window.
+    calls: 100
+    period: 60 seconds
+    scope: per connection
+    source: https://learn.microsoft.com/en-us/connectors/highspotmcptestjan20/
+
+  - name: REST API — General
+    description: >-
+      The Highspot REST API enforces rate limits that vary based on subscription plan.
+      Specific limits are not publicly documented. The Python SDK implements automatic
+      retry logic with up to 5 retries on connection failures to handle transient
+      rate limit responses.
+    calls: Not publicly documented
+    period: Per minute (typical)
+    scope: Per subscription plan
+    notes: >-
+      Contact Highspot support or consult your account agreement for plan-specific
+      rate limit details. Higher-tier plans (Best) may receive elevated limits for
+      Insights Layer API access.
+
+retryBehavior:
+  description: >-
+    The official Highspot Python SDK (highspot.api module) implements a
+    get_request_with_retries() function that automatically retries GET requests
+    up to 5 times on connection failures and timeouts. Non-connection errors
+    raise RuntimeError immediately without retry.
+  maxRetries: 5
+  errorHandling: APIConnectionError raised after exhausting retries
+  source: https://highspot.readthedocs.io/en/latest/_modules/highspot/api.html
+
+authentication:
+  method: API Key (Key + Secret pair)
+  location: Highspot account settings — Developer > Basics
+  fields:
+    - name: URL
+      description: Highspot API instance URL (e.g., https://api-su2.highspot.com)
+    - name: Key
+      description: API client key
+    - name: Secret
+      description: API client secret
+  alternativeMethod: OAuth 2.0 (for user-delegated authorization flows)

@@ -1,0 +1,107 @@
+name: Highspot FinOps
+description: >-
+  Financial operations guidance for managing Highspot subscription costs, optimizing
+  seat allocation, negotiating contracts, and understanding total cost of ownership.
+  Highspot uses custom per-user pricing with no published list prices; all contracts
+  require direct negotiation with sales. API access (MCP Server and Insights Layer APIs)
+  is gated to the highest "Best" tier.
+url: https://www.highspot.com/pricing/
+
+costManagement:
+  pricingModel: Custom per-user subscription, annual prepayment standard
+  contractTerms:
+    - Annual
+    - Multi-year (2–3 years, typically discounted)
+  billingCycle: Annual prepayment
+  volumeDiscounts: true
+  volumeDiscountNotes: >-
+    Per-user pricing decreases with seat count. Larger deployments receive
+    proportionally better per-seat rates.
+
+  marketBenchmarks:
+    medianAnnualSpend: "$60,005"
+    spendRange: "$21,066–$178,451"
+    typicalPerUserPerMonth: "$45–$65 (market estimate, unconfirmed by Highspot)"
+    averageNegotiatedSavings: "14.59%"
+    source: https://www.vendr.com/marketplace/highspot
+
+optimization:
+  strategies:
+    - name: Right-size seat count
+      description: >-
+        Audit active users before renewal. Remove inactive seats and negotiate
+        based on actual usage data. Highspot's analytics can surface engagement
+        metrics to identify unused licenses.
+
+    - name: Negotiate multi-year commitments
+      description: >-
+        2–3 year contracts typically unlock discounts versus annual agreements.
+        Include annual price caps of 3–5% maximum to limit renewal increases.
+
+    - name: Engage early
+      description: >-
+        Begin renewal negotiations 60–90 days before contract end. Highspot's
+        fiscal cycles affect discount availability; timing discussions to their
+        quarter-end increases leverage.
+
+    - name: Anchor to budget constraints
+      description: >-
+        Use competitor pricing from Seismic and Showpad as anchors during
+        negotiation. Highspot typically offers concessions when alternatives
+        are presented credibly.
+
+    - name: Bundle API access strategically
+      description: >-
+        MCP Server and Insights Layer APIs are only available in the "Best" tier.
+        If API integration is a primary use case, negotiate API access as part of
+        the initial deal rather than upgrading mid-contract.
+
+    - name: Evaluate add-on costs
+      description: >-
+        Onboarding fees ($10,000–$50,000+) and training services ($5,000–$25,000)
+        can significantly inflate Year 1 costs. Negotiate these as part of the
+        initial contract rather than post-signing.
+
+hiddenCosts:
+  - category: Onboarding
+    estimatedRange: "$10,000–$50,000+"
+    notes: Implementation and data migration support
+
+  - category: Training and enablement services
+    estimatedRange: "$5,000–$25,000"
+    notes: Formal training programs and admin certification
+
+  - category: Premium integrations
+    estimatedRange: Variable
+    notes: Some CRM and enterprise integrations may carry additional fees
+
+  - category: Annual renewal increases
+    estimatedRange: "3–7% typical"
+    notes: Build price caps into multi-year agreements to control escalation
+
+  - category: Total cost of ownership premium
+    estimatedRange: "15–30% above subscription quote"
+    notes: Accounts for implementation, training, and indirect operational costs
+
+tierGuidance:
+  - tier: Good — Equip and Engage
+    bestFor: Smaller teams needing content management and basic AI search
+    apiAccess: Limited; no MCP Server or Insights Layer APIs
+
+  - tier: Better — Train and Practice
+    bestFor: Mid-market organizations needing training and skills development
+    apiAccess: Standard REST API; no MCP Server or Insights Layer APIs
+
+  - tier: Best — Coach and Reinforce
+    bestFor: >-
+      Enterprise organizations requiring full coaching, meeting intelligence,
+      and programmatic API integration via MCP Server and Insights Layer APIs
+    apiAccess: Full — MCP Server, Insights Layer APIs (Search and Instant Answers)
+
+complianceAndSecurity:
+  certifications:
+    - SOC 2 Type 2
+    - ISO 27001:2022
+    - ISO 27701:2019
+  trustPage: https://www.highspot.com/trust/
+  privacyContact: privacy@highspot.com
