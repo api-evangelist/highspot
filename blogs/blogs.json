@@ -1,0 +1,151 @@
+{
+  "blogUrl": "https://www.highspot.com/blog/",
+  "fetched": "2026-06-13",
+  "posts": [
+    {
+      "title": "Highspot MCP Server Now Available in the OpenAI ChatGPT App Store",
+      "url": "https://www.highspot.com/blog/highspot-mcp-server-in-openai/",
+      "description": "Highspot expands its agentic ecosystem with OpenAI integration, enabling sales teams to assess deal health and take action directly from ChatGPT."
+    },
+    {
+      "title": "Highspot unveils GTM agent to turn go-to-market strategy into a winning revenue performance system",
+      "url": "https://www.highspot.com/blog/highspot-gtm-agent-spring-launch-2026/",
+      "description": "GTM Agent connects signals to real-time actions helping marketing, enablement, and sales teams win more deals."
+    },
+    {
+      "title": "Highspot announces intent to merge with Seismic",
+      "url": "https://www.highspot.com/blog/highspot-announces-intent-to-merge-with-seismic/",
+      "description": "Proposed transaction bringing together two leading enablement platforms to support modern revenue organizations."
+    },
+    {
+      "title": "Where wins happen: The Highspot Winter Launch supercharges deal execution",
+      "url": "https://www.highspot.com/blog/highspot-winter-launch-2026/",
+      "description": "Winter Launch 2026 helps GTM teams close the gap between planning and performance with AI-powered deal intelligence, training, and execution."
+    },
+    {
+      "title": "Gap selling: A problem-centric sales methodology",
+      "url": "https://www.highspot.com/blog/gap-selling/",
+      "description": "Methodology focusing on aligning customer pain points to solutions rather than leading with product pitches."
+    },
+    {
+      "title": "How high-performing marketing teams influence late-stage deals (not just leads)",
+      "url": "https://www.highspot.com/blog/how-marketing-influences-late-stage-deals/",
+      "description": "Explores how marketers can extend influence beyond pipeline generation to help sellers win deals."
+    },
+    {
+      "title": "Highspot in ChatGPT and Claude: Turn deal context into action",
+      "url": "https://www.highspot.com/blog/highspot-chatgpt-turn-deal-context-into-action/",
+      "description": "Addresses how AI integration transforms deal context into actionable outcomes for revenue teams."
+    },
+    {
+      "title": "AI in B2B sales: Enterprise examples for inspiration",
+      "url": "https://www.highspot.com/blog/ai-in-b2b-sales/",
+      "description": "Enterprise companies leverage AI at tactical and strategic levels to improve GTM performance."
+    },
+    {
+      "title": "Refining your go-to-market plan with an AI GTM agent",
+      "url": "https://www.highspot.com/blog/go-to-market-plan/",
+      "description": "Demonstrates how agentic AI guides GTM teams through planning, execution, analysis, and optimization."
+    },
+    {
+      "title": "Channel sales: Strategy advice to equip partner sellers",
+      "url": "https://www.highspot.com/blog/channel-sales-strategy/",
+      "description": "Data-driven, AI-powered approaches to set third-party partner sellers up for sustained success."
+    },
+    {
+      "title": "The revenue impact of human-centered AI",
+      "url": "https://www.highspot.com/blog/revenue-impact-human-centered-ai/",
+      "description": "Explores how human-centered AI delivers real-time guidance and helps sellers turn insights into revenue."
+    },
+    {
+      "title": "If AI disappeared tomorrow, would your sellers execute differently?",
+      "url": "https://www.highspot.com/blog/ai-disappeared-sellers-execution/",
+      "description": "Examines whether execution fundamentals would change without AI and what that reveals about actual impact."
+    },
+    {
+      "title": "How to find the best sales coaching software for GTM",
+      "url": "https://www.highspot.com/blog/best-sales-coaching-software/",
+      "description": "Guidance on selecting coaching software to ensure sellers receive in-the-moment guidance."
+    },
+    {
+      "title": "From faster to smarter sales training: Turning AI into impact",
+      "url": "https://www.highspot.com/blog/sales-training-turning-ai-into-impact/",
+      "description": "Structured enablement approaches transform AI speed into measurable performance improvements."
+    },
+    {
+      "title": "Target account selling: How to close high-value deals",
+      "url": "https://www.highspot.com/blog/target-account-selling/",
+      "description": "Enterprise professionals execute target account strategies using agentic AI solutions."
+    },
+    {
+      "title": "AI deal coaching: Helping sales reps show up smarter",
+      "url": "https://www.highspot.com/blog/deal-coaching/",
+      "description": "Enterprise sales teams rely on AI deal coaching platforms to help sellers work qualified leads intelligently."
+    },
+    {
+      "title": "How AI coaching is redefining readiness",
+      "url": "https://www.highspot.com/blog/ai-coaching-redefining-readiness/",
+      "description": "AI role play, coaching, and agents help sales teams practice smarter and stay ready for buyer conversations."
+    },
+    {
+      "title": "Driving growth in healthcare and medtech: Precision content for complex buyer journeys",
+      "url": "https://www.highspot.com/blog/healthcare-medtech-content-complex-buyer-journeys/",
+      "description": "Healthcare and medtech marketers deliver precise, compliant messaging across complex buyer journeys."
+    },
+    {
+      "title": "How to write a winning sales proposal: A guide",
+      "url": "https://www.highspot.com/blog/sales-proposal/",
+      "description": "Guidelines for converting late-stage leads through compelling proposal writing."
+    },
+    {
+      "title": "Precision selling in med devices: Finding the right message for surgeons, VACs, and GPOs",
+      "url": "https://www.highspot.com/blog/precision-selling-medical-devices/",
+      "description": "Med device reps deliver tailored messaging to different stakeholder types using AI-powered tools."
+    },
+    {
+      "title": "What is enterprise content management? A GTM guide",
+      "url": "https://www.highspot.com/blog/enterprise-content-management/",
+      "description": "ECM systems centralize enablement assets, empowering reps to sell smarter."
+    },
+    {
+      "title": "What is a digital sales room? The DSR, explained",
+      "url": "https://www.highspot.com/blog/digital-sales-room/",
+      "description": "Explores digital sales rooms' key features, benefits, and role in modern sales strategies."
+    },
+    {
+      "title": "Generative AI for sales: A powerful tool for GTM teams",
+      "url": "https://www.highspot.com/blog/generative-ai-for-sales/",
+      "description": "Generative AI enables reps to continuously boost performance and accelerate revenue growth."
+    },
+    {
+      "title": "The widening GTM performance gap, and what actually closes it",
+      "url": "https://www.highspot.com/blog/closing-the-gtm-performance-gap/",
+      "description": "Intentional AI use, execution maturity, and unified systems drive real transformation."
+    },
+    {
+      "title": "Turning GTM strategy into action: How AI is powering the next era of execution",
+      "url": "https://www.highspot.com/blog/ai-powers-next-era-of-execution/",
+      "description": "Analytics-driven decision-making enhances execution and accelerates business outcomes."
+    },
+    {
+      "title": "The path to GTM success: What we learned at Spark '25",
+      "url": "https://www.highspot.com/blog/path-to-gtm-success-spark-25-recap/",
+      "description": "Global conference discussions revealed AI has disrupted every aspect of GTM success."
+    },
+    {
+      "title": "How Highspot helps teams improve content effectiveness, coaching, and buyer engagement",
+      "url": "https://www.highspot.com/blog/highspot-improves-content-coaching-buyer-engagement/",
+      "description": "Highspot empowers teams to find winning content, deliver better coaching, and create connected buyer experiences."
+    },
+    {
+      "title": "From gut feel to GTM precision: The power of Highspot Analytics",
+      "url": "https://www.highspot.com/blog/the-power-of-highspot-analytics/",
+      "description": "Analytics leverage enables smarter decisions that enhance execution and accelerate outcomes."
+    },
+    {
+      "title": "Why go-to-market strategy fails and what the best leaders do differently",
+      "url": "https://www.highspot.com/blog/why-gtm-strategy-fails-and-leadership-solutions/",
+      "description": "Top leaders close the GTM performance gap and drive real results through different approaches."
+    }
+  ]
+}

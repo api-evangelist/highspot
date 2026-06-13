@@ -1,0 +1,125 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Highspot",
+  "url": "https://www.highspot.com/",
+  "description": "Highspot is a sales enablement platform offering a REST API for managing content, training programs, pitch analytics, CRM integrations, and buyer engagement tracking. The API provides access to spots, items, users, groups, pitches, and analytics, with OAuth 2.0 authentication and API key credentials. Highspot also offers an MCP Server enabling LLMs to search content, manage pitches, generate Digital Rooms, and access the Insights Layer APIs for search and instant answers in AI workflows.",
+  "logo": "https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg",
+  "sameAs": [
+    "https://www.linkedin.com/company/highspot",
+    "https://github.com/highspot"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "url": "https://www.highspot.com/contact/",
+    "email": "support@highspot.com",
+    "contactType": "customer support"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Highspot API Products",
+    "itemListElement": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Highspot API",
+        "applicationCategory": "BusinessApplication",
+        "description": "The Highspot REST API provides programmatic access to the Highspot sales enablement platform, enabling management of content (spots and items), users, groups, pitches, domain settings, and analytics. Supports standard HTTP methods (GET, POST, PUT, DELETE) with API key authentication using client key and secret credentials obtained from the Developer section of Highspot account settings.",
+        "url": "https://highspot.readthedocs.io/en/latest/primary-modules.html",
+        "featureList": [
+          "Content management (spots and items)",
+          "User and group management",
+          "Pitch creation and analytics",
+          "Domain settings management",
+          "Async request handling",
+          "API key authentication"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.highspot.com/pricing/"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Highspot MCP Server",
+        "applicationCategory": "AIApplication",
+        "description": "The Highspot MCP Server leverages the Model Context Protocol to provide LLMs with access to sales content, knowledge, insights, and actions within Highspot. Enables searching content, accessing deal-specific answers, recommending content, creating linked pitches, generating Digital Rooms, and invoking Highspot Agents. Available in OpenAI, Anthropic, and Microsoft Copilot platforms.",
+        "url": "https://www.highspot.com/product/mcp-server/",
+        "featureList": [
+          "Search Highspot content",
+          "Access deal-specific answers",
+          "Recommend relevant content",
+          "Create linked pitches",
+          "Generate Digital Rooms",
+          "Invoke Highspot Agents",
+          "OpenAI ChatGPT integration",
+          "Anthropic Claude integration",
+          "Microsoft Copilot integration"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.highspot.com/pricing/"
+        }
+      }
+    ]
+  },
+  "subjectOf": [
+    {
+      "@type": "WebPage",
+      "name": "Highspot API Documentation",
+      "url": "https://highspot.readthedocs.io/en/latest/primary-modules.html"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Highspot MCP Server",
+      "url": "https://www.highspot.com/product/mcp-server/"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Highspot Blog",
+      "url": "https://www.highspot.com/blog/"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Highspot Status",
+      "url": "https://status.highspot.com/"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Highspot Integrations",
+      "url": "https://www.highspot.com/integrations/"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Highspot Integration Exchange",
+      "url": "https://exchange.highspot.com/integrations"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Highspot Trust & Security",
+      "url": "https://www.highspot.com/trust/"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Highspot Privacy Policy",
+      "url": "https://www.highspot.com/privacy/"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Highspot Terms of Service",
+      "url": "https://www.highspot.com/terms/"
+    }
+  ],
+  "keywords": [
+    "Sales Enablement",
+    "Content Management",
+    "Pitch Analytics",
+    "CRM Integration",
+    "Buyer Engagement",
+    "Training",
+    "Coaching",
+    "AI",
+    "MCP Server",
+    "GTM",
+    "Digital Sales Room"
+  ]
+}
