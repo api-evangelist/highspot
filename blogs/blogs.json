@@ -1,6 +1,6 @@
 {
   "blogUrl": "https://www.highspot.com/blog/",
-  "fetched": "2026-06-13",
+  "fetched": "2026-06-14T20:42:17Z",
   "posts": [
     {
       "title": "Highspot MCP Server Now Available in the OpenAI ChatGPT App Store",
@@ -147,5 +147,16 @@
       "url": "https://www.highspot.com/blog/why-gtm-strategy-fails-and-leadership-solutions/",
       "description": "Top leaders close the GTM performance gap and drive real results through different approaches."
     }
-  ]
+  ],
+  "repo": "highspot",
+  "feeds": [
+    {
+      "source": "https://www.highspot.com/contact/",
+      "feed_url": "https://www.highspot.com/feeds/podcasts/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0
 }
