@@ -8,7 +8,7 @@ description: >-
   MCP Server enabling LLMs to search content, manage pitches, generate Digital Rooms,
   and access the Insights Layer APIs for search and instant answers in AI workflows.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/highspot/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -33,7 +33,7 @@ apis:
       HTTP methods (GET, POST, PUT, DELETE) with API key authentication using
       client key and secret credentials obtained from the Developer section of
       Highspot account settings.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.highspot.com/
     baseURL: https://api-su2.highspot.com
     tags:
@@ -62,7 +62,7 @@ apis:
       content, creating linked pitches, generating Digital Rooms, and invoking
       Highspot Agents. Available in OpenAI, Anthropic, and Microsoft Copilot platforms.
       Throttle limit: 100 API calls per connection per 60 seconds.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.highspot.com/product/mcp-server/
     baseURL: https://api-su2.highspot.com
     tags:

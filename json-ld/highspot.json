@@ -4,7 +4,7 @@
   "name": "Highspot",
   "url": "https://www.highspot.com/",
   "description": "Highspot is a sales enablement platform offering a REST API for managing content, training programs, pitch analytics, CRM integrations, and buyer engagement tracking. The API provides access to spots, items, users, groups, pitches, and analytics, with OAuth 2.0 authentication and API key credentials. Highspot also offers an MCP Server enabling LLMs to search content, manage pitches, generate Digital Rooms, and access the Insights Layer APIs for search and instant answers in AI workflows.",
-  "logo": "https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg",
+  "logo": "https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg",
   "sameAs": [
     "https://www.linkedin.com/company/highspot",
     "https://github.com/highspot"
