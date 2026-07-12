@@ -81,6 +81,12 @@ apis:
         email: support@highspot.com
 
 common:
+  - type: TrustCenter
+    url: security/highspot-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/highspot-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/highspot-domain-security.yml
   - type: Website
     url: https://www.highspot.com/
   - type: Documentation

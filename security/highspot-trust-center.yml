@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://www.highspot.com/trust/
+url: https://www.highspot.com/trust/
+certifications:
+- ISO 27001
+- GDPR
+evidence:
+- source: https://www.highspot.com/trust/
+  keywords:
+  - iso 27001
+  - gdpr
