@@ -1,12 +1,18 @@
 aid: highspot
 name: Highspot
 description: >-
-  Highspot is a sales enablement platform offering a REST API for managing content,
-  training programs, pitch analytics, CRM integrations, and buyer engagement tracking.
-  The API provides access to spots, items, users, groups, pitches, and analytics,
-  with OAuth 2.0 authentication and API key credentials. Highspot also offers an
-  MCP Server enabling LLMs to search content, manage pitches, generate Digital Rooms,
-  and access the Insights Layer APIs for search and instant answers in AI workflows.
+  Highspot is a sales enablement and go-to-market platform whose API surface splits in
+  two. A per-tenant REST API at https://api-{instance}.highspot.com/v1.0 covers spots,
+  items, item content, users, groups, pitches and analytics, authenticated with an API
+  client key and secret issued from account settings; it has no public reference and no
+  published OpenAPI. Alongside it Highspot runs a first-party remote MCP server at
+  https://mcp.highspot.com/mcp, verified live, secured with OAuth 2.1 (dynamic client
+  registration, PKCE, scopes mcp:read / mcp:write / offline_access) and discoverable
+  through RFC 8414 and RFC 9728 metadata documents. The MCP server exposes content
+  search, instant answers, deal context, content recommendations, linked pitches,
+  Digital Room generation and Highspot Agents to OpenAI, Anthropic and Microsoft
+  Copilot clients. Both the MCP server and the Insights Layer APIs are gated to the
+  top "Best" subscription tier.
 type: Index
 accessModel:
   pricing: enterprise
@@ -23,7 +29,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/highspot.png
 url: https://raw.githubusercontent.com/api-evangelist/highspot/refs/heads/main/apis.yml
 created: "2026-06-13"
-modified: "2026-06-13"
+modified: "2026-08-14"
 specificationVersion: "0.19"
 tags:
   - Sales Enablement
@@ -54,12 +60,18 @@ apis:
       - Pitch Analytics
       - CRM Integration
     properties:
-      - type: Documentation
-        url: https://highspot.readthedocs.io/en/latest/primary-modules.html
-      - type: PythonSDK
-        url: https://highspot.readthedocs.io/
+      - type: DeveloperPortal
+        url: https://developers.highspot.com/
       - type: Authentication
-        url: https://docs.workato.com/en/connectors/highspot.html
+        url: authentication/highspot-authentication.yml
+      - type: Conventions
+        url: conventions/highspot-conventions.yml
+      - type: Lifecycle
+        url: lifecycle/highspot-lifecycle.yml
+      - type: Conformance
+        url: conformance/highspot-conformance.yml
+      - type: Support
+        url: https://www.highspot.com/contact/
     contact:
       - FN: Highspot Support
         url: https://www.highspot.com/contact/
@@ -76,7 +88,7 @@ apis:
       Throttle limit: 100 API calls per connection per 60 seconds.
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.highspot.com/product/mcp-server/
-    baseURL: https://api-su2.highspot.com
+    baseURL: https://mcp.highspot.com/mcp
     tags:
       - MCP
       - AI
@@ -85,6 +97,14 @@ apis:
     properties:
       - type: Documentation
         url: https://www.highspot.com/product/mcp-server/
+      - type: MCPServer
+        url: mcp/highspot-mcp.yml
+      - type: OAuthScopes
+        url: scopes/highspot-scopes.yml
+      - type: Authentication
+        url: authentication/highspot-authentication.yml
+      - type: RateLimits
+        url: rate-limits/highspot-rate-limits.yml
       - type: MicrosoftConnector
         url: https://learn.microsoft.com/en-us/connectors/highspotmcptestjan20/
     contact:
@@ -101,10 +121,6 @@ common:
     url: security/highspot-domain-security.yml
   - type: Website
     url: https://www.highspot.com/
-  - type: Documentation
-    url: https://highspot.readthedocs.io/en/latest/primary-modules.html
-  - type: PythonSDK
-    url: https://highspot.readthedocs.io/
   - type: Integrations
     url: https://www.highspot.com/integrations/
   - type: IntegrationDirectory
@@ -135,6 +151,66 @@ common:
     url: rate-limits/highspot-rate-limits.yml
   - type: FinOps
     url: finops/highspot-finops.yml
+  - type: WellKnown
+    url: well-known/highspot-well-known.yml
+  - type: LLMsTxt
+    url: llms/highspot-llms.txt
+  - type: Packages
+    url: packages/highspot-packages.yml
+  - type: Authentication
+    url: authentication/highspot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/highspot-scopes.yml
+  - type: Conventions
+    url: conventions/highspot-conventions.yml
+  - type: Conformance
+    url: conformance/highspot-conformance.yml
+  - type: Compliance
+    url: security/highspot-trust-center.yml
+  - type: Lifecycle
+    url: lifecycle/highspot-lifecycle.yml
+  - type: StatusPage
+    url: https://status.highspot.com/
+  - type: DeveloperPortal
+    url: https://developers.highspot.com/
+  - type: HelpCenter
+    url: https://support.highspot.com/
+  - type: Community
+    url: https://community.highspot.com/
+  - type: Support
+    url: https://www.highspot.com/contact/
+  - type: Login
+    url: https://app.highspot.com/
+  - type: PrivacyPolicy
+    url: https://www.highspot.com/privacy/
+  - type: GitHubOrganization
+    url: https://github.com/highspot
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-14'
+  status: enriched
+  artifacts_added: 12
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: mcp-surface-verified
+  detail: >-
+    The REST API reference is gated — developers.highspot.com 302s to
+    https://app.highspot.com/unsupported_browser and api-su2.highspot.com/v1.0/ returns
+    401 — but contract discovery found a live first-party remote MCP server at
+    https://mcp.highspot.com/mcp with full OAuth 2.1 discovery metadata, so this
+    profile is covered on the agent surface even though no OpenAPI is published.
+  evidence:
+    - url: https://mcp.highspot.com/mcp
+      status: 401
+    - url: https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+      status: 200
+    - url: https://app.highspot.com/.well-known/oauth-authorization-server
+      status: 200
+    - url: https://developers.highspot.com/
+      status: 302
+    - url: https://api-su2.highspot.com/openapi.json
+      status: 404
+  checked: '2026-08-14'
