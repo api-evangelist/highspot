@@ -1,0 +1,182 @@
+name: Highspot Well-Known URIs
+description: >-
+  Probe of standard /.well-known/ paths across every Highspot host named in apis.yml
+  plus the two hosts contract discovery turned up (app.highspot.com and
+  mcp.highspot.com). Two real documents are served: RFC 8414 OAuth 2.0 Authorization
+  Server Metadata on app.highspot.com, and RFC 9728 OAuth 2.0 Protected Resource
+  Metadata for the Highspot MCP server on mcp.highspot.com. Everything else either
+  404s or answers 200 with the Highspot single-page-app HTML shell, which is NOT a
+  document and is recorded here as a miss.
+generated: '2026-08-14'
+method: probed
+source: live HTTPS probes of /.well-known/ paths on every Highspot host
+checked: '2026-08-14'
+
+hosts:
+  - host: www.highspot.com
+    note: Marketing site (WordPress). No well-known documents served.
+    probes:
+      - path: /.well-known/security.txt
+        status: 404
+        hit: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        hit: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        hit: false
+      - path: /.well-known/api-catalog
+        status: 404
+        hit: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        hit: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        hit: false
+      - path: /.well-known/agent.json
+        status: 404
+        hit: false
+
+  - host: api-su2.highspot.com
+    note: >-
+      REST API host from apis.yml baseURL. Returns a bare 404 for every well-known
+      path; the versioned API root (/v1.0/) returns 401 "Could not authenticate user."
+    probes:
+      - path: /.well-known/security.txt
+        status: 404
+        hit: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        hit: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        hit: false
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        hit: false
+      - path: /.well-known/api-catalog
+        status: 404
+        hit: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        hit: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        hit: false
+      - path: /.well-known/agent.json
+        status: 404
+        hit: false
+
+  - host: app.highspot.com
+    note: >-
+      Highspot web application and OAuth issuer. Serves a REAL RFC 8414 authorization
+      server metadata document. Every OTHER well-known path on this host answers 200
+      with the Highspot SPA HTML shell (title "Home | Highspot") — a catch-all route,
+      not a document. Those are recorded as misses.
+    probes:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        hit: true
+        file: highspot-oauth-authorization-server.json
+        document: RFC 8414 OAuth 2.0 Authorization Server Metadata
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not a document
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not a document
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not a document
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not a document
+      - path: /.well-known/api-catalog
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not a document
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not an A2A AgentCard
+      - path: /.well-known/agent.json
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not an A2A AgentCard
+
+  - host: mcp.highspot.com
+    note: >-
+      Highspot remote MCP server host. Serves a REAL RFC 9728 protected-resource
+      metadata document at the resource-scoped path advertised in the 401
+      WWW-Authenticate header, and redirects the authorization-server metadata path
+      to app.highspot.com.
+    probes:
+      - path: /.well-known/oauth-protected-resource/mcp
+        status: 200
+        content_type: application/json
+        hit: true
+        file: highspot-oauth-protected-resource.json
+        document: RFC 9728 OAuth 2.0 Protected Resource Metadata
+        discovered_via: >-
+          WWW-Authenticate: Bearer realm="mcp-server",
+          resource_metadata="https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp"
+      - path: /.well-known/oauth-authorization-server
+        status: 302
+        hit: true
+        redirects_to: https://app.highspot.com/.well-known/oauth-authorization-server
+        note: Redirect to the issuer's metadata document (saved under app.highspot.com above)
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell at the unscoped path; the real document is at /mcp
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not a document
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not a document
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not an A2A AgentCard
+      - path: /.well-known/agent.json
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not an A2A AgentCard
+      - path: /.well-known/mcp.json
+        status: 200
+        content_type: text/html
+        hit: false
+        note: SPA HTML shell, not a document
+
+summary:
+  paths_probed: 31
+  real_documents: 2
+  security_txt: false
+  openid_configuration: false
+  agent_card: false
+  false_positive_200s: 15
+  note: >-
+    Highspot serves no security.txt on any host, and no A2A agent card exists — every
+    agent-card.json/agent.json 200 is the SPA catch-all returning HTML. No AgentCard
+    pointer is emitted.

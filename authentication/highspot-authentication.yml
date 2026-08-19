@@ -1,0 +1,129 @@
+name: Highspot Authentication
+description: >-
+  Highspot runs two distinct authentication surfaces. The REST API
+  (https://api-{instance}.highspot.com/v1.0) uses a static API client key + secret
+  pair issued from Highspot account settings under Developer > Basics — no OAuth, no
+  scopes, no token exchange. The remote MCP server (https://mcp.highspot.com/mcp)
+  uses OAuth 2.1 bearer tokens issued by app.highspot.com, with Dynamic Client
+  Registration, PKCE and refresh tokens. The OAuth half was read from Highspot's own
+  RFC 8414 / RFC 9728 discovery documents; the API-key half is documented only in
+  integrator documentation and in-product settings, because Highspot's developer
+  reference sits behind an authenticated app login.
+generated: '2026-08-14'
+method: probed
+source: >-
+  https://app.highspot.com/.well-known/oauth-authorization-server +
+  https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+docs: https://www.highspot.com/product/mcp-server/
+checked: '2026-08-14'
+
+schemes:
+  - id: highspot-rest-api-key
+    applies_to: Highspot REST API
+    type: apiKey
+    scheme_detail: API client key + API client secret pair
+    transport: HTTPS
+    credential_source: >-
+      Highspot account settings > Developer > Basics. Requires Highspot admin rights
+      to issue.
+    base_url_pattern: https://api-{instance}.highspot.com/{version}
+    observed_instances:
+      - https://api-su2.highspot.com/v1.0
+    versions_seen:
+      - v1.0
+      - v0.5
+    scopes: none
+    rotation: not documented publicly
+    optional_features:
+      - name: Impersonation
+        description: >-
+          "Impersonation in Highspot REST API" can be enabled per API client so
+          requests are evaluated against a named user's spot-level permissions rather
+          than the API client's own access.
+        source: https://docs.glean.com/connectors/native/highspot/
+    evidence:
+      - url: https://api-su2.highspot.com/v1.0/
+        http_status: 401
+        body: Could not authenticate user.
+        note: >-
+          Confirms the host is live and the versioned API root is credential-gated.
+    sources:
+      - https://docs.workato.com/en/connectors/highspot.html
+      - https://docs.glean.com/connectors/native/highspot/
+    confidence: medium
+    note: >-
+      Recorded from third-party integrator documentation because Highspot publishes no
+      public API reference; developers.highspot.com 302s into the app login.
+
+  - id: highspot-mcp-oauth
+    applies_to: Highspot MCP Server
+    type: oauth2
+    flows:
+      authorizationCode:
+        authorizationUrl: https://app.highspot.com/oauth2/v1/authorize
+        tokenUrl: https://app.highspot.com/auth/oauth2/v1/token
+        refreshUrl: https://app.highspot.com/auth/oauth2/v1/token
+        scopes:
+          mcp:read: Read content, answers and analytics through the MCP server
+          mcp:write: Create pitches and Digital Rooms and invoke Highspot Agents
+          offline_access: Issue a refresh token for unattended agent operation
+    issuer: https://app.highspot.com
+    dynamic_client_registration:
+      supported: true
+      registration_endpoint: https://app.highspot.com/auth/oauth2/v1/register
+      spec: RFC 7591
+    pkce:
+      required_by_spec: true
+      methods_supported:
+        - S256
+        - plain
+    token_endpoint_auth_methods_supported:
+      - client_secret_post
+      - none
+    bearer_challenge: >-
+      WWW-Authenticate: Bearer realm="mcp-server",
+      resource_metadata="https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp"
+    evidence:
+      - url: https://mcp.highspot.com/mcp
+        http_status: 401
+        note: JSON-RPC error plus RFC 9728 bearer challenge
+      - url: https://app.highspot.com/.well-known/oauth-authorization-server
+        http_status: 200
+        note: RFC 8414 authorization server metadata
+      - url: https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+        http_status: 200
+        note: RFC 9728 protected resource metadata
+    confidence: high
+
+  - id: highspot-microsoft-connector
+    applies_to: Highspot MCP connector for Microsoft Copilot / Power Platform
+    type: oauth2
+    scheme_detail: >-
+      Interactive Highspot sign-in from the Copilot for Sales side pane mints the
+      tokens the connector uses. Admins install the connector into the tenant; each
+      user authorizes individually.
+    source: https://learn.microsoft.com/en-us/connectors/highspotmcptestjan20/
+    confidence: high
+
+openid_connect:
+  supported: false
+  evidence:
+    - url: https://app.highspot.com/.well-known/openid-configuration
+      http_status: 200
+      note: >-
+        Answers 200 with the Highspot single-page-app HTML shell, not an OIDC
+        discovery document. Highspot advertises OAuth 2.1 only, with no id_token or
+        openid scope in scopes_supported.
+
+mutual_tls:
+  supported: false
+  note: Not documented on any public Highspot surface.
+
+gaps:
+  - >-
+    No public API reference: developers.highspot.com and developer.highspot.com both
+    302 to https://app.highspot.com/unsupported_browser, so the authoritative auth
+    documentation for the REST API is reachable only by licensed customers.
+  - >-
+    No documented key rotation, expiry, or revocation policy for REST API client
+    key/secret pairs.

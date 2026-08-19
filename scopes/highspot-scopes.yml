@@ -1,0 +1,73 @@
+name: Highspot OAuth Scopes
+description: >-
+  OAuth 2.1 scopes Highspot advertises for its remote MCP server. Read directly from
+  the two machine-readable discovery documents Highspot serves — RFC 8414
+  authorization server metadata on app.highspot.com and RFC 9728 protected resource
+  metadata on mcp.highspot.com — not from prose. Both documents agree on the same
+  three scopes. Highspot's REST API (api-{instance}.highspot.com/v1.0) does NOT use
+  OAuth scopes; it authenticates with an API client key and secret pair, so no scope
+  vocabulary exists for it.
+generated: '2026-08-14'
+method: probed
+source: https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+docs: https://www.highspot.com/product/mcp-server/
+checked: '2026-08-14'
+
+authorization_server:
+  issuer: https://app.highspot.com
+  metadata_url: https://app.highspot.com/.well-known/oauth-authorization-server
+  authorization_endpoint: https://app.highspot.com/oauth2/v1/authorize
+  token_endpoint: https://app.highspot.com/auth/oauth2/v1/token
+  registration_endpoint: https://app.highspot.com/auth/oauth2/v1/register
+  grant_types_supported:
+    - authorization_code
+    - refresh_token
+  response_types_supported:
+    - code
+  token_endpoint_auth_methods_supported:
+    - client_secret_post
+    - none
+  code_challenge_methods_supported:
+    - S256
+    - plain
+
+protected_resource:
+  resource: https://mcp.highspot.com/mcp
+  metadata_url: https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+  authorization_servers:
+    - https://app.highspot.com/auth/
+
+scopes:
+  - scope: mcp:read
+    description: >-
+      Read access through the Highspot MCP server — search content, retrieve items,
+      request instant answers and analytics-backed responses.
+    type: read
+    source: https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+  - scope: mcp:write
+    description: >-
+      Write access through the Highspot MCP server — create linked pitches, generate
+      Digital Rooms, and invoke Highspot Agents that take action.
+    type: write
+    source: https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+  - scope: offline_access
+    description: >-
+      Issue a refresh token so an agent can keep operating without a fresh interactive
+      authorization.
+    type: session
+    source: https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+
+scope_count: 3
+
+notes:
+  - >-
+    Scope granularity is coarse: two scopes cover every read and every write across
+    content, pitches, Digital Rooms and agent invocation. There is no per-resource or
+    per-spot scope, so an agent granted mcp:write can create pitches and rooms on the
+    user's behalf with no narrower consent step.
+  - >-
+    plain is advertised alongside S256 in code_challenge_methods_supported. S256 is
+    the only method MCP clients should use.
+  - >-
+    No corresponding scope vocabulary exists for the REST API; see
+    authentication/highspot-authentication.yml.

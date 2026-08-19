@@ -1,0 +1,144 @@
+name: Highspot Standards Conformance
+description: >-
+  What cross-cutting standards Highspot's public API surface actually conforms to,
+  each asserted from a document or probe rather than a marketing claim. Highspot's
+  strongest conformance is on the agent side: the MCP server implements the full
+  OAuth 2.1 discovery chain (RFC 8414, RFC 9728, RFC 7591, RFC 7636) that the MCP
+  authorization spec requires. Its REST API conforms to nothing machine-readable —
+  there is no published OpenAPI, no problem+json error format, and no OAuth.
+generated: '2026-08-14'
+method: probed
+source: live probes + https://www.highspot.com/trust/
+checked: '2026-08-14'
+
+standards:
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: >-
+      https://mcp.highspot.com/mcp answers a JSON-RPC tools/list POST with a
+      well-formed JSON-RPC 2.0 error envelope (HTTP 401), exposes an mcp-session-id
+      response header, and accepts the streamable-HTTP Accept pair
+      (application/json, text/event-stream). First-party host on highspot.com.
+    artifact: mcp/highspot-mcp.yml
+
+  - id: oauth2
+    name: OAuth 2.1 authorization code with PKCE
+    conforms: true
+    evidence: >-
+      app.highspot.com advertises authorization_code + refresh_token grants,
+      response_type code only, and S256 PKCE.
+    artifact: scopes/highspot-scopes.yml
+
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata
+    conforms: true
+    evidence: >-
+      HTTP 200 application/json at
+      https://app.highspot.com/.well-known/oauth-authorization-server with issuer,
+      authorization_endpoint, token_endpoint, registration_endpoint, scopes_supported,
+      grant_types_supported and code_challenge_methods_supported.
+    artifact: well-known/highspot-oauth-authorization-server.json
+
+  - id: rfc9728
+    name: OAuth 2.0 Protected Resource Metadata
+    conforms: true
+    evidence: >-
+      HTTP 200 application/json at
+      https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp, correctly
+      advertised from the 401 WWW-Authenticate resource_metadata parameter.
+    artifact: well-known/highspot-oauth-protected-resource.json
+
+  - id: rfc7591
+    name: OAuth 2.0 Dynamic Client Registration
+    conforms: true
+    evidence: >-
+      registration_endpoint https://app.highspot.com/auth/oauth2/v1/register present
+      in the authorization server metadata, which is what lets an MCP client register
+      itself without a manual Highspot app setup.
+
+  - id: rfc7636
+    name: PKCE
+    conforms: true
+    evidence: >-
+      code_challenge_methods_supported ["S256","plain"]. S256 present; plain is also
+      offered, which is weaker than the MCP authorization spec recommends.
+
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: >-
+      https://app.highspot.com/.well-known/openid-configuration returns the SPA HTML
+      shell, not a discovery document, and scopes_supported contains no openid scope.
+
+  - id: openapi
+    name: OpenAPI
+    conforms: false
+    evidence: >-
+      No OpenAPI or Swagger document found on api-su2.highspot.com (/openapi.json,
+      /openapi.yaml, /swagger.json, /api-docs, /docs all 404), on api.highspot.com,
+      on www.highspot.com, or on the developer host — developers.highspot.com 302s to
+      https://app.highspot.com/unsupported_browser.
+
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: >-
+      No AsyncAPI document and no publicly documented event or webhook catalog on any
+      Highspot host. Third-party integrators poll (Workato ships a polling "New item"
+      trigger) rather than subscribe.
+
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Unauthenticated error responses from api-su2.highspot.com are plain text
+      ("Could not authenticate user.") with content-type text/html, not
+      application/problem+json.
+
+  - id: rfc9110-status-codes
+    name: Standard HTTP status semantics
+    conforms: true
+    evidence: >-
+      401 on unauthenticated API and MCP requests, 404 on unknown paths, 302 on the
+      metadata redirect — all correct.
+
+  - id: json-rpc-2.0
+    name: JSON-RPC 2.0
+    conforms: true
+    evidence: >-
+      MCP error envelope {"jsonrpc":"2.0","error":{"code":-32602,...},"id":null} uses
+      the reserved Invalid params code correctly.
+
+  - id: iso27001
+    name: ISO/IEC 27001
+    conforms: true
+    evidence: Certification named on https://www.highspot.com/trust/
+    artifact: security/highspot-trust-center.yml
+
+  - id: gdpr
+    name: GDPR
+    conforms: true
+    evidence: Compliance program named on https://www.highspot.com/trust/
+    artifact: security/highspot-trust-center.yml
+
+  - id: fapi
+    name: FAPI
+    conforms: false
+    evidence: Not applicable — not a financial-grade API provider.
+
+  - id: scim
+    name: SCIM
+    conforms: false
+    evidence: >-
+      No SCIM endpoint documented publicly. Highspot's user provisioning is
+      documented only inside the customer-only support center.
+
+conformance_summary:
+  asserted: 16
+  conforming: 10
+  non_conforming: 6
+  strongest: OAuth 2.1 / MCP authorization discovery chain
+  weakest: >-
+    No machine-readable contract of any kind for the REST API — no OpenAPI, no
+    AsyncAPI, no Postman collection, no error format.

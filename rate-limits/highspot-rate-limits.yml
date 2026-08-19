@@ -1,3 +1,16 @@
+generated: '2026-08-14'
+method: searched
+source: https://learn.microsoft.com/en-us/connectors/highspotmcptestjan20/
+checked: '2026-08-14'
+limit_count: 1
+response_headers_documented: false
+response_headers_observed: none
+note: >-
+  One published numeric limit exists — 100 MCP calls per connection per 60 seconds,
+  from the Microsoft connector reference Highspot publishes. REST API limits are
+  undocumented publicly. No X-RateLimit-*, RateLimit-* or Retry-After header was
+  observed on any unauthenticated response from api-su2.highspot.com or
+  mcp.highspot.com, so an agent has no runtime signal to back off on.
 name: Highspot Rate Limits
 description: >-
   Highspot enforces rate limits on its REST API and MCP Server to maintain

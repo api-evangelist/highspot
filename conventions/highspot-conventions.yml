@@ -1,0 +1,171 @@
+name: Highspot API Conventions
+description: >-
+  Cross-cutting runtime semantics for the Highspot API surface — how you authenticate,
+  how you page, how versions are addressed, what errors look like, and what the API
+  tells you at runtime. Highspot publishes no public API reference, so everything here
+  is either directly observed on the wire against api-su2.highspot.com and
+  mcp.highspot.com, or taken from integrator documentation that names the behaviour
+  explicitly. Where a convention is absent, that absence is recorded rather than
+  guessed: Highspot documents no idempotency mechanism, no request-id tracing header,
+  no rate-limit response headers, and no structured error envelope.
+generated: '2026-08-14'
+method: probed
+source: >-
+  live probes of api-su2.highspot.com and mcp.highspot.com +
+  https://docs.glean.com/connectors/native/highspot/ +
+  https://docs.workato.com/en/connectors/highspot.html
+checked: '2026-08-14'
+
+authentication:
+  rest:
+    style: API client key + secret pair
+    scopes: none
+    issuance: Highspot account settings > Developer > Basics (admin only)
+    detail: authentication/highspot-authentication.yml
+  mcp:
+    style: OAuth 2.1 bearer token (authorization_code + PKCE, DCR, refresh)
+    scopes:
+      - mcp:read
+      - mcp:write
+      - offline_access
+    detail: scopes/highspot-scopes.yml
+
+versioning:
+  style: url-path
+  pattern: https://api-{instance}.highspot.com/{version}/{resource}
+  current: v1.0
+  also_selectable: v0.5
+  host_is_tenant_scoped: true
+  note: >-
+    The host itself is part of the contract. api-su2 is one instance; Highspot runs
+    AMERICAS1/2, EMEA1/2 and APAC1 regions per its status page, so a client cannot
+    hardcode a single base URL across customers.
+  detail: lifecycle/highspot-lifecycle.yml
+
+pagination:
+  style: page-size + offset (as exercised by connectors)
+  default_page_size: 100
+  evidence: >-
+    "Page size is generally set to 100" — https://docs.glean.com/connectors/native/highspot/
+  documented_parameters: not published
+  response_envelope: not published
+  confidence: low
+  note: >-
+    The parameter names are not public. Only the page size a large integrator settled
+    on is observable, which is enough to say pagination exists and not enough to call
+    it from a spec.
+
+error_envelope:
+  format: plain text
+  content_type: text/plain
+  problem_json: false
+  observed:
+    - url: https://api-su2.highspot.com/v1.0/
+      http_status: 401
+      content_type: text/plain
+      body: Could not authenticate user.
+    - url: https://api-su2.highspot.com/v1.0/users
+      http_status: 401
+      content_type: text/plain
+      body: Could not authenticate user.
+  mcp_error_envelope:
+    format: JSON-RPC 2.0
+    observed:
+      url: https://mcp.highspot.com/mcp
+      http_status: 401
+      body: >-
+        {"jsonrpc":"2.0","error":{"code":-32602,"message":"Invalid authorization
+        header. Expected format: Bearer <token>"},"id":null}
+  note: >-
+    The two surfaces disagree. MCP returns a structured JSON-RPC error an agent can
+    branch on; the REST API returns a 28-byte text/plain sentence with no code, no
+    type and no trace identifier. No ErrorCatalog artifact is emitted because there is
+    no published error reference to catalog and no OpenAPI responses to derive from.
+
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No idempotency key, no retry-safe write semantics, and no documentation of either
+    on any public Highspot surface. No Idempotency pointer is emitted.
+
+request_tracing:
+  request_id_header: none observed
+  note: >-
+    Error responses from api-su2.highspot.com carry no correlation identifier. The MCP
+    server exposes mcp-session-id via Access-Control-Expose-Headers, which is a
+    session handle rather than a per-request trace id.
+
+rate_limit_signaling:
+  headers: none observed
+  documented_limits:
+    - surface: MCP Server (via Microsoft connector)
+      calls: 100
+      window_seconds: 60
+      scope: per connection
+      source: https://learn.microsoft.com/en-us/connectors/highspotmcptestjan20/
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was observed on any
+    unauthenticated response. Runtime limits cannot be discovered without credentials.
+  detail: rate-limits/highspot-rate-limits.yml
+
+transport_security:
+  tls: TLSv1.3
+  api_host_headers_observed:
+    strict-transport-security: max-age=31536000; includeSubDomains
+    x-content-type-options: nosniff
+    x-frame-options: DENY
+    referrer-policy: no-referrer
+    content-security-policy: "default-src 'none'; frame-ancestors 'none'"
+    cache-control: no-store
+    x-robots-tag: noindex, noarchive, nosnippet
+  note: >-
+    api-su2.highspot.com sends a full modern security header set including HSTS with
+    includeSubDomains, observed on the 401 from /v1.0/. This is stronger than the
+    marketing host, which is fronted by Cloudflare and sends no HSTS.
+  detail: security/highspot-domain-security.yml
+
+resource_surface:
+  status: partial
+  confidence: low
+  source: >-
+    Third-party connector documentation and a community Python SDK. Highspot publishes
+    no reference of its own, so these are the resources integrators are observed
+    calling — not a contract.
+  resources:
+    - path: /users
+      operations_seen: [list, get]
+      source: https://docs.glean.com/connectors/native/highspot/
+    - path: /spots
+      operations_seen: [list]
+      source: https://docs.glean.com/connectors/native/highspot/
+    - path: /items/{id}
+      operations_seen: [list, get]
+      source: https://docs.glean.com/connectors/native/highspot/
+    - path: /items/{id}/content
+      operations_seen: [get]
+      source: https://docs.glean.com/connectors/native/highspot/
+    - path: /pitches
+      operations_seen: [list]
+      source: https://highspot.readthedocs.io/en/latest/primary-modules.html
+    - path: /groups
+      operations_seen: [list, get]
+      source: https://highspot.readthedocs.io/en/latest/primary-modules.html
+  note: >-
+    Recorded as evidence of what the API exposes, NOT as a derived specification. No
+    OpenAPI is written from this list; that would be fabrication.
+
+permissions_model:
+  impersonation:
+    supported: true
+    description: >-
+      "Impersonation in Highspot REST API" can be enabled per API client so requests
+      are evaluated against a named user's spot-level permissions instead of the API
+      client's own access.
+    source: https://docs.glean.com/connectors/native/highspot/
+
+gaps:
+  - No public API reference — developers.highspot.com 302s to app.highspot.com/unsupported_browser.
+  - No machine-readable contract (no OpenAPI, AsyncAPI, GraphQL SDL, or Postman collection).
+  - No structured error format on REST; no error code vocabulary.
+  - No idempotency, no request-id, no rate-limit response headers.

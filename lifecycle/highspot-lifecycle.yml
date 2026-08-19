@@ -1,0 +1,110 @@
+name: Highspot API Lifecycle
+description: >-
+  Versioning, status and deprecation posture for the Highspot API surface. Highspot
+  runs a real Atlassian Statuspage at status.highspot.com with a machine-readable JSON
+  API and per-region components, which is the strongest lifecycle signal it publishes.
+  Versioning is by URL path segment (/v1.0, with /v0.5 still selectable in third-party
+  connectors), and there is no public deprecation policy, no Sunset/Deprecation header
+  documentation, and no public changelog or release-notes feed — Highspot release
+  notes live inside the customer-only support center.
+generated: '2026-08-14'
+method: probed
+source: https://status.highspot.com/api/v2/summary.json
+checked: '2026-08-14'
+
+versioning:
+  scheme: url-path
+  pattern: https://api-{instance}.highspot.com/{version}
+  current: v1.0
+  versions_observed:
+    - version: v1.0
+      status: current
+      evidence: >-
+        https://api-su2.highspot.com/v1.0/ returns HTTP 401 "Could not authenticate
+        user." — live and credential-gated.
+    - version: v0.5
+      status: still selectable
+      evidence: >-
+        Workato and Glean connector documentation both describe choosing the API
+        version at connection time and cite v0.5 as an example instance URL.
+      source: https://docs.workato.com/en/connectors/highspot.html
+  instance_addressing: >-
+    The API host is per-tenant/per-region (api-su2.highspot.com in this profile). The
+    Statuspage component list confirms the regional split: AMERICAS1, AMERICAS2,
+    EMEA1, EMEA2, APAC1.
+  policy_published: false
+
+deprecation:
+  policy_published: false
+  sunset_header: not documented
+  deprecation_header: not documented
+  notice_period: not published
+  deprecated_operations: []
+  note: >-
+    No public deprecation policy exists on any Highspot host. No Deprecation pointer
+    is emitted in apis.yml because there is nothing to point at — a v0.5 that is still
+    selectable alongside v1.0 with no stated end-of-life is the observable posture.
+
+status_page:
+  url: https://status.highspot.com/
+  provider: Atlassian Statuspage
+  machine_readable: true
+  endpoints:
+    - url: https://status.highspot.com/api/v2/status.json
+      http_status: 200
+    - url: https://status.highspot.com/api/v2/summary.json
+      http_status: 200
+    - url: https://status.highspot.com/api/v2/components.json
+  page_id: yv0cybrq3zvh
+  time_zone: America/Los_Angeles
+  observed:
+    checked: '2026-08-14'
+    indicator: none
+    description: All Systems Operational
+  regions:
+    - AMERICAS1
+    - AMERICAS2
+    - EMEA1
+    - EMEA2
+    - APAC1
+  components:
+    - Administration & Authentication
+    - Analytics
+    - Content
+    - CRM Integration
+    - Learning
+    - Pitches
+    - Search
+    - Support Center
+    - Engagement
+  note: >-
+    Components are published per region, so a subscriber can watch the specific
+    Highspot region their instance runs in. No dedicated "API" or "MCP Server"
+    component exists — API availability has to be inferred from Content, Search and
+    Administration & Authentication.
+
+changelog:
+  published: false
+  probes:
+    - url: https://www.highspot.com/release-notes/
+      http_status: 404
+    - url: https://www.highspot.com/whats-new/
+      http_status: 404
+    - url: https://www.highspot.com/product/whats-new/
+      http_status: 404
+    - url: https://help.highspot.com/hc/en-us
+      http_status: 403
+      note: Cloudflare bot challenge
+  note: >-
+    No public, dated API changelog. No ChangeLog artifact or pointer is emitted.
+
+sla:
+  published: false
+  note: >-
+    No public SLA document. Availability commitments are in the customer agreement
+    referenced from https://www.highspot.com/terms/.
+
+support:
+  url: https://www.highspot.com/contact/
+  email: support@highspot.com
+  community: https://community.highspot.com/

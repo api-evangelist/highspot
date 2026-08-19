@@ -1,0 +1,122 @@
+name: Highspot Client Packages
+description: >-
+  Registry sweep for Highspot API client libraries. Highspot publishes NO first-party
+  SDK in any package registry — npm, PyPI, RubyGems, NuGet, Maven Central, crates.io
+  and the Go module proxy all return zero Highspot-authored packages, and the
+  github.com/highspot organization contains only forks of unrelated open-source
+  projects (testcafe, flutter plugins, aws-sdk-ruby) with no Highspot API client.
+  Two community packages exist and both are recorded below with their real currency,
+  because their release dates are the only dated evidence available about how the
+  integration ecosystem is aging. The Python SDK on readthedocs.io that apis.yml
+  previously listed as a Highspot SDK is one of them: it is third-party, authored by
+  Jeff Shurtliff, and last released in December 2022.
+generated: '2026-08-14'
+method: searched
+source: >-
+  registry.npmjs.org, pypi.org, rubygems.org, azuresearch-usnc.nuget.org,
+  search.maven.org, crates.io, proxy.golang.org, api.github.com/orgs/highspot
+checked: '2026-08-14'
+
+official_sdk_count: 0
+package_count: 2
+
+packages:
+  - name: highspot
+    registry: pypi
+    language: Python
+    url: https://pypi.org/project/highspot/
+    repository: https://github.com/jeffshurtliff/highspot
+    docs: https://highspot.readthedocs.io/
+    version: 1.0.0
+    published: '2022-12-11'
+    official: false
+    author: Jeff Shurtliff
+    description: A Python toolset for utilizing the Highspot API.
+    coverage:
+      modules:
+        - api
+        - domain
+        - groups
+        - items
+        - pitches
+        - request
+        - users
+      note: >-
+        Read-only surface. Every documented function is a getter (get_item,
+        get_items, get_users, get_pitches, get_groups, me, get_request_status);
+        nothing in the library writes.
+    decay_signal: >-
+      Last release 2022-12-11 — over three and a half years old, and predates both
+      the Highspot MCP server and the current v1.0 REST version this catalog records.
+      This is the library Highspot's own apis.yml entry pointed at as "PythonSDK".
+    note: >-
+      Community project, not Highspot. Marked official:false on the evidence of the
+      PyPI author field (Jeff Shurtliff, jeff.shurtliff@rsa.com) and the GitHub
+      homepage under a personal account.
+
+  - name: highspot-cli
+    registry: npm
+    language: JavaScript/TypeScript
+    url: https://www.npmjs.com/package/highspot-cli
+    repository: https://github.com/advait/highspot-cli
+    version: 0.2.1
+    published: '2026-02-24'
+    official: false
+    author: Advait Shinde
+    description: Agent-first CLI for the Highspot API.
+    note: >-
+      Community CLI under a personal GitHub account, not a Highspot release. Recorded
+      here rather than in cli/ because there is no first-party Highspot CLI.
+
+registries_checked:
+  - registry: npm
+    query: highspot
+    results: 1
+    official: 0
+  - registry: pypi
+    query: highspot
+    results: 1
+    official: 0
+  - registry: rubygems
+    query: highspot
+    results: 0
+    official: 0
+  - registry: nuget
+    query: highspot
+    results: 0
+    official: 0
+  - registry: maven-central
+    query: highspot
+    results: 0
+    official: 0
+  - registry: crates.io
+    query: highspot
+    results: 0
+    official: 0
+  - registry: go-proxy
+    query: github.com/highspot
+    results: 0
+    official: 0
+    note: 'proxy.golang.org returned 404: invalid import path'
+  - registry: packagist
+    query: highspot
+    results: null
+    official: 0
+    note: packagist.org returned HTTP 502 at probe time; not re-checked
+  - registry: github
+    query: orgs/highspot repos
+    results: 48
+    official: 0
+    note: >-
+      All 48 repositories are forks of unrelated open-source projects. No Highspot API
+      client, no MCP server package, no SDK.
+
+findings:
+  - >-
+    Highspot ships a remote MCP server but no client package of any kind — there is
+    nothing to npm install, pip install, or import. Every integration path is either
+    raw HTTP against api-{instance}.highspot.com or a third-party iPaaS connector
+    (Workato, Glean, Smartsheet, Microsoft Power Platform).
+  - >-
+    No SDKs pointer is emitted in apis.yml, because official_sdk_count is 0. Both
+    packages here are community work.

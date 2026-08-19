@@ -1,0 +1,129 @@
+name: Highspot MCP Server
+description: >-
+  Highspot ships a first-party REMOTE Model Context Protocol server at
+  https://mcp.highspot.com/mcp. It is a hosted HTTP MCP endpoint — an agent POSTs
+  JSON-RPC to it directly; there is no npx/stdio package to install. The endpoint was
+  verified live: an unauthenticated tools/list POST returns HTTP 401 with a
+  well-formed JSON-RPC error and an RFC 9728 WWW-Authenticate challenge pointing at
+  the server's protected-resource metadata. Authorization is OAuth 2.1 against
+  app.highspot.com with Dynamic Client Registration and PKCE. Because the live schema
+  is auth-gated, the tool list below is the capability set Highspot publishes on its
+  own product page — names and descriptions only. Input schemas require an
+  authenticated tools/list call.
+generated: '2026-08-14'
+method: probed
+source: https://mcp.highspot.com/mcp
+checked: '2026-08-14'
+
+deployment:
+  mode: remote
+  endpoint: https://mcp.highspot.com/mcp
+  auth: oauth
+  verified: probed
+
+x-evidence:
+  fetched: '2026-08-14'
+  probe:
+    method: POST
+    url: https://mcp.highspot.com/mcp
+    headers:
+      Content-Type: application/json
+      Accept: application/json, text/event-stream
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    http_status: 401
+    content_type: application/json; charset=utf-8
+    response_body: >-
+      {"jsonrpc":"2.0","error":{"code":-32602,"message":"Invalid authorization header.
+      Expected format: Bearer <token>"},"id":null}
+    www_authenticate: >-
+      Bearer realm="mcp-server",
+      resource_metadata="https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp"
+    server_header: 'X-Powered-By: Express'
+    session_header: 'Access-Control-Expose-Headers: mcp-session-id'
+  note: >-
+    The endpoint was not guessed into existence — it answers in JSON-RPC, emits an
+    MCP session header, and advertises its own OAuth protected-resource metadata.
+    That is affirmative evidence of a live MCP server, not a soft 200.
+
+authorization:
+  protocol: OAuth 2.1 (authorization_code + PKCE, refresh_token)
+  issuer: https://app.highspot.com
+  authorization_endpoint: https://app.highspot.com/oauth2/v1/authorize
+  token_endpoint: https://app.highspot.com/auth/oauth2/v1/token
+  registration_endpoint: https://app.highspot.com/auth/oauth2/v1/register
+  dynamic_client_registration: true
+  pkce_methods:
+    - S256
+    - plain
+  scopes:
+    - mcp:read
+    - mcp:write
+    - offline_access
+  resource: https://mcp.highspot.com/mcp
+  metadata:
+    authorization_server: well-known/highspot-oauth-authorization-server.json
+    protected_resource: well-known/highspot-oauth-protected-resource.json
+  see_also: scopes/highspot-scopes.yml
+
+transport:
+  type: streamable-http
+  evidence: >-
+    Server accepts Accept: application/json, text/event-stream and exposes an
+    mcp-session-id response header via Access-Control-Expose-Headers.
+
+tools:
+  status: documented
+  schemas: gated
+  note: >-
+    Live tools/list requires a bearer token. The entries below are the capabilities
+    Highspot publishes verbatim on https://www.highspot.com/product/mcp-server/ —
+    capability statements, not confirmed tool names. Input schemas need an
+    authenticated introspection pass. Nothing here is invented.
+  source: https://www.highspot.com/product/mcp-server/
+  capabilities:
+    - capability: Search Highspot content
+      description: Search across content stored in Highspot.
+    - capability: Retrieve item
+      description: Retrieve the exact item you need from Highspot.
+    - capability: Instant answers
+      description: Get instant answers to GTM questions across content and analytics.
+    - capability: Deal answers and next steps
+      description: Surface deal-specific answers and next steps for open opportunities.
+    - capability: Generate AI Role Play
+      description: Generate AI Role Plays personalized to the deal and the seller.
+    - capability: Recommend content
+      description: Recommend content based on contextual questions.
+    - capability: Create linked pitch
+      description: Create linked pitches to engage buyers.
+    - capability: Generate Digital Room
+      description: Generate deal-specific Highspot Digital Rooms.
+    - capability: Invoke Highspot Agents
+      description: Access Highspot Agents for answers, insights, and actions.
+
+availability:
+  entitlement: >-
+    MCP Server access is gated to the top "Best — Coach and Reinforce" subscription
+    tier per plans/highspot-plans-pricing.yml.
+  platforms:
+    - name: OpenAI
+      source: https://www.highspot.com/product/mcp-server/
+    - name: Anthropic
+      source: https://www.highspot.com/product/mcp-server/
+    - name: Microsoft 365 Copilot / Copilot Studio
+      source: https://learn.microsoft.com/en-us/connectors/highspotmcptestjan20/
+  microsoft_connector:
+    name: Highspot MCP (Preview)
+    publisher: Highspot
+    url: https://learn.microsoft.com/en-us/connectors/highspotmcptestjan20/
+    operation_id: InvokeServer
+    description: Invokes the Highspot MCP endpoint.
+    throttle:
+      calls: 100
+      renewal_period_seconds: 60
+      scope: per connection
+
+limitations:
+  - No public tool schema — tools/list is bearer-gated, so agents cannot discover
+    parameters without a Highspot license and an OAuth grant.
+  - No published REST OpenAPI to crosswalk MCP tools against; see the note in
+    conformance/highspot-conformance.yml.
