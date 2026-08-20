@@ -39,6 +39,16 @@ tags:
   - Buyer Engagement
   - Training
   - Coaching
+  - Artificial Intelligence
+  - MCP Server
+tags_raw:
+  - Sales Enablement
+  - Content Management
+  - Pitch Analytics
+  - CRM Integration
+  - Buyer Engagement
+  - Training
+  - Coaching
   - AI
   - MCP Server
 apis:
@@ -90,6 +100,11 @@ apis:
     humanURL: https://www.highspot.com/product/mcp-server/
     baseURL: https://mcp.highspot.com/mcp
     tags:
+      - MCP
+      - Artificial Intelligence
+      - LLM
+      - Sales Enablement
+    tags_raw:
       - MCP
       - AI
       - LLM
