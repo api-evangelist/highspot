@@ -87,3 +87,28 @@ marketData:
   averageSavingsNegotiated: "14.59%"
   totalCostOfOwnershipPremium: "15–30% above subscription quote"
   source: https://www.vendr.com/marketplace/highspot
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: Good — Equip and Engage
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Better — Train and Practice
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Best — Coach and Reinforce
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
