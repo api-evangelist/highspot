@@ -113,3 +113,18 @@ limitations:
 - No public tool schema — tools/list is bearer-gated, so agents cannot discover parameters without a Highspot
   license and an OAuth grant.
 - No published REST OpenAPI to crosswalk MCP tools against; see the note in conformance/highspot-conformance.yml.
+rfc9728:
+  endpoint: https://mcp.highspot.com/mcp
+  metadata_url: https://mcp.highspot.com/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://mcp.highspot.com/mcp
+    authorization_servers:
+    - https://app.highspot.com/auth/
+    scopes_supported:
+    - mcp:read
+    - mcp:write
+    - offline_access
