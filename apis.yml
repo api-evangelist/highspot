@@ -1,5 +1,7 @@
 aid: highspot
+
 name: Highspot
+
 description: >-
   Highspot is a sales enablement and go-to-market platform whose API surface splits in
   two. A per-tenant REST API at https://api-{instance}.highspot.com/v1.0 covers spots,
@@ -13,7 +15,9 @@ description: >-
   Digital Room generation and Highspot Agents to OpenAI, Anthropic and Microsoft
   Copilot clients. Both the MCP server and the Insights Layer APIs are gated to the
   top "Best" subscription tier.
+
 type: Index
+
 deliveryModel:
   model: saas
   open_source: false
@@ -25,6 +29,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: enterprise
   onboarding: unknown
@@ -37,14 +42,23 @@ accessModel:
   - plans
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/highspot.png
+
 url: https://raw.githubusercontent.com/api-evangelist/highspot/refs/heads/main/apis.yml
+
 created: "2026-06-13"
+
 modified: "2026-08-14"
+
 specificationVersion: '0.23'
+
 x-docs-platform: redocly
+
 x-docs-platform-confidence: medium
+
 x-docs-platform-checked: 2026-10-03
+
 tags:
   - Sales Enablement
   - Content Management
@@ -55,6 +69,7 @@ tags:
   - Coaching
   - Artificial Intelligence
   - MCP Server
+
 tags_raw:
   - Sales Enablement
   - Content Management
@@ -65,6 +80,95 @@ tags_raw:
   - Coaching
   - AI
   - MCP Server
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+
+common:
+  - type: Deprecation
+    url: lifecycle/highspot-lifecycle.yml
+  - type: Hosts
+    url: hosts/highspot-hosts.yml
+  - type: IntegrationEdges
+    url: integrations/highspot-integration-edges.yml
+  - type: Vendors
+    url: vendors/highspot-vendors.yml
+  - type: Newsroom
+    url: https://www.highspot.com/news/
+  - type: Leadership
+    url: https://www.highspot.com/leadership/
+  - type: TrustCenter
+    url: security/highspot-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/highspot-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/highspot-domain-security.yml
+  - type: Website
+    url: https://www.highspot.com/
+  - type: Integrations
+    url: https://www.highspot.com/integrations/
+  - type: IntegrationDirectory
+    url: https://exchange.highspot.com/integrations
+  - type: MCPServer
+    url: https://www.highspot.com/product/mcp-server/
+  - type: Pricing
+    url: https://www.highspot.com/pricing/
+  - type: Status
+    url: https://status.highspot.com/
+  - type: Security
+    url: https://www.highspot.com/trust/
+  - type: Privacy
+    url: https://www.highspot.com/privacy/
+  - type: TermsOfService
+    url: https://www.highspot.com/terms/
+  - type: Contact
+    url: https://www.highspot.com/contact/
+  - type: Blog
+    url: https://www.highspot.com/blog/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/highspot
+  - type: GitHub
+    url: https://github.com/highspot
+  - type: Plans
+    url: plans/highspot-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/highspot-rate-limits.yml
+  - type: FinOps
+    url: finops/highspot-finops.yml
+  - type: WellKnown
+    url: well-known/highspot-well-known.yml
+  - type: LLMsTxt
+    url: llms/highspot-llms.txt
+  - type: Authentication
+    url: authentication/highspot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/highspot-scopes.yml
+  - type: Conventions
+    url: conventions/highspot-conventions.yml
+  - type: Conformance
+    url: conformance/highspot-conformance.yml
+  - type: Compliance
+    url: security/highspot-trust-center.yml
+  - type: Lifecycle
+    url: lifecycle/highspot-lifecycle.yml
+  - type: StatusPage
+    url: https://status.highspot.com/
+  - type: DeveloperPortal
+    url: https://developers.highspot.com/
+  - type: HelpCenter
+    url: https://support.highspot.com/
+  - type: Community
+    url: https://community.highspot.com/
+  - type: Support
+    url: https://www.highspot.com/contact/
+  - type: Login
+    url: https://app.highspot.com/
+  - type: PrivacyPolicy
+    url: https://www.highspot.com/privacy/
+  - type: GitHubOrganization
+    url: https://github.com/highspot
+
 apis:
   - aid: highspot:highspot-api
     name: Highspot API
@@ -141,87 +245,12 @@ apis:
         url: https://www.highspot.com/contact/
         email: support@highspot.com
 
-common:
-  - type: TrustCenter
-    url: security/highspot-trust-center.yml
-  - type: VulnerabilityDisclosure
-    url: security/highspot-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/highspot-domain-security.yml
-  - type: Website
-    url: https://www.highspot.com/
-  - type: Integrations
-    url: https://www.highspot.com/integrations/
-  - type: IntegrationDirectory
-    url: https://exchange.highspot.com/integrations
-  - type: MCPServer
-    url: https://www.highspot.com/product/mcp-server/
-  - type: Pricing
-    url: https://www.highspot.com/pricing/
-  - type: Status
-    url: https://status.highspot.com/
-  - type: Security
-    url: https://www.highspot.com/trust/
-  - type: Privacy
-    url: https://www.highspot.com/privacy/
-  - type: TermsOfService
-    url: https://www.highspot.com/terms/
-  - type: Contact
-    url: https://www.highspot.com/contact/
-  - type: Blog
-    url: https://www.highspot.com/blog/
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/highspot
-  - type: GitHub
-    url: https://github.com/highspot
-  - type: Plans
-    url: plans/highspot-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/highspot-rate-limits.yml
-  - type: FinOps
-    url: finops/highspot-finops.yml
-  - type: WellKnown
-    url: well-known/highspot-well-known.yml
-  - type: LLMsTxt
-    url: llms/highspot-llms.txt
-  - type: Packages
-    url: packages/highspot-packages.yml
-  - type: Authentication
-    url: authentication/highspot-authentication.yml
-  - type: OAuthScopes
-    url: scopes/highspot-scopes.yml
-  - type: Conventions
-    url: conventions/highspot-conventions.yml
-  - type: Conformance
-    url: conformance/highspot-conformance.yml
-  - type: Compliance
-    url: security/highspot-trust-center.yml
-  - type: Lifecycle
-    url: lifecycle/highspot-lifecycle.yml
-  - type: StatusPage
-    url: https://status.highspot.com/
-  - type: DeveloperPortal
-    url: https://developers.highspot.com/
-  - type: HelpCenter
-    url: https://support.highspot.com/
-  - type: Community
-    url: https://community.highspot.com/
-  - type: Support
-    url: https://www.highspot.com/contact/
-  - type: Login
-    url: https://app.highspot.com/
-  - type: PrivacyPolicy
-    url: https://www.highspot.com/privacy/
-  - type: GitHubOrganization
-    url: https://github.com/highspot
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
 x-enrichment:
-  date: '2026-08-14'
+  date: '2026-10-20'
   status: enriched
-  artifacts_added: 12
-  pass: local-v1
+  artifacts_added: 4
+  pass: local-v5
+
 x-coverage:
   state: covered
   reason: mcp-surface-verified

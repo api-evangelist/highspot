@@ -1,3 +1,25 @@
+generated: '2026-10-20'
+method: searched
+source:
+- microsoft-teams/integrations/microsoft-teams-integration-edges.yml
+- slack/integrations/slack-integration-edges.yml
+- zoom/integrations/zoom-integration-edges.yml
+- https://zapier.com/apps/highspot/integrations
+- https://n8n.io/integrations/highspot/
+- https://composio.dev/toolkits/highspot
+- https://monid.ai/tools/highspot
+checked:
+- https://cloudsecurityalliance.org/star/registry
+- https://eucoc.cloud/en/public-register/list-of-adherent-services
+- microsoft-teams/integrations/microsoft-teams-integration-edges.yml
+- slack/integrations/slack-integration-edges.yml
+- zoom/integrations/zoom-integration-edges.yml
+- https://composio.dev/toolkits/highspot
+- https://monid.ai/tools/highspot
+- https://n8n.io/integrations/highspot/
+- https://zapier.com/apps/highspot/integrations
+summary: null
+marketplace_apps: []
 edges:
 - partner_name: Microsoft Teams (own)
   partner: microsoft-teams
@@ -82,15 +104,4 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
-generated: '2026-10-18'
-method: searched
-source:
-- microsoft-teams/integrations/microsoft-teams-integration-edges.yml
-- slack/integrations/slack-integration-edges.yml
-- zoom/integrations/zoom-integration-edges.yml
-checked:
-- https://cloudsecurityalliance.org/star/registry
-- https://eucoc.cloud/en/public-register/list-of-adherent-services
-- microsoft-teams/integrations/microsoft-teams-integration-edges.yml
-- slack/integrations/slack-integration-edges.yml
-- zoom/integrations/zoom-integration-edges.yml
+templates: []

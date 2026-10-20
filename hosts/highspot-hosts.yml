@@ -1,0 +1,199 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 15
+  own: 10
+  other_domain: 3
+  platform: 2
+  roles:
+  - api
+  - community
+  - identity
+  - other
+  - portal
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: api-su2.highspot.com
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: highspot.com
+  role: other
+  relation: own
+- host: api.highspot.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: highspot.com
+  role: api
+  relation: own
+- host: api.microsoft.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: microsoft.com
+  role: api
+  relation: other-domain
+- host: app.highspot.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  types:
+  - Login
+  serves:
+  - docs
+  registrable_domain: highspot.com
+  role: identity
+  relation: own
+- host: community.highspot.com
+  found_by:
+  - pointer
+  - probed
+  types:
+  - Community
+  serves: []
+  registrable_domain: highspot.com
+  role: community
+  relation: own
+- host: developers.highspot.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - DeveloperPortal
+  serves:
+  - documentation
+  vendor: redocly
+  registrable_domain: highspot.com
+  role: portal
+  relation: own
+- host: devportal.microsoft.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: microsoft.com
+  role: portal
+  relation: other-domain
+- host: exchange.highspot.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - IntegrationDirectory
+  serves: []
+  registrable_domain: highspot.com
+  role: other
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHub
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: learn.microsoft.com
+  found_by:
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: microsoft.com
+  role: other
+  relation: other-domain
+- host: mcp.highspot.com
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: highspot.com
+  role: other
+  relation: own
+- host: status.highspot.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Status
+  - StatusPage
+  serves: []
+  registrable_domain: highspot.com
+  role: status
+  relation: own
+- host: support.highspot.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - HelpCenter
+  serves: []
+  registrable_domain: highspot.com
+  role: support
+  relation: own
+- host: www.highspot.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - Newsroom
+  - Leadership
+  - Website
+  - Integrations
+  - MCPServer
+  - Pricing
+  - Security
+  - Privacy
+  - TermsOfService
+  - Contact
+  - Blog
+  - Support
+  - PrivacyPolicy
+  serves:
+  - docs
+  - cdn
+  - hosting
+  vendor: cloudflare
+  registrable_domain: highspot.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
